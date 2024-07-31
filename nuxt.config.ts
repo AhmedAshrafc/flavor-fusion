@@ -1,0 +1,40 @@
+// https://nuxt.com/docs/api/configuration/nuxt-config
+import Aura from "@primevue/themes/aura";
+
+export default defineNuxtConfig({
+  compatibilityDate: "2024-04-03",
+  devtools: { enabled: true },
+  runtimeConfig: {
+    public: {
+      apiBaseUrl: process.env.API_BASE_URL || "http://localhost:3000",
+    },
+  },
+  modules: ["@primevue/nuxt-module", "@nuxt/ui"],
+  primevue: {
+    options: {
+      theme: {
+        preset: Aura,
+      },
+    },
+  },
+  css: ["~/assets/css/main.css", "primeicons/primeicons.css"],
+  app: {
+    head: {
+      charset: "utf-8",
+      viewport: "width=device-width, initial-scale=1",
+      link: [
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Teko:wght@300..700&display=swap",
+        },
+      ],
+    },
+    pageTransition: { name: "page", mode: "out-in" },
+  },
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
+});

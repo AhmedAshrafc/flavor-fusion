@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Teko", sans-serif;
+  background-color: #e2dcd8;
+  color: #121214;
+  letter-spacing: 0.05em;
+}
+
+::selection {
+  background-color: #defffa;
+  color: #555555;
+}
