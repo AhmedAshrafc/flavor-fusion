@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import dayjs from "dayjs";
-
 import { useToast } from "primevue/usetoast";
 const toast = useToast();
+import { useSearchResultsStore } from "~/stores/searchResultsStore";
 
 const currentDate = ref("");
 const isLoggedIn = ref(false);
@@ -23,6 +23,26 @@ const handleLogout = () => {
     detail: "Logout successful",
     life: 5000,
   });
+};
+
+const searchResultsStore = useSearchResultsStore();
+
+const searchInput = ref("");
+
+const performSearch = async () => {
+  const url = `https://app.interimapi.com/api/v1/8aecf488-4e4d-487e-aa1b-7a3f6abacdfc/recipes?search=${encodeURIComponent(
+    searchInput.value
+  )}`;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    const data = await response.json();
+    searchResultsStore.setSearchResults(data);
+    router.push("/search-results");
+    searchInput.value = "";
+  } catch (error) {
+    console.error("Failed to fetch recipes:", error);
+  }
 };
 
 onMounted(() => {
@@ -53,6 +73,20 @@ onMounted(() => {
         <span class="text-sm md:text-base">{{ currentDate }}</span>
         <h1 class="text-[4rem] font-black tracking-widest">flavor fusion</h1>
         <h2 class="text-[1.5rem]">the greatest egyptian recipes</h2>
+        <div class="relative w-full lg:w-1/2 mt-4 p-6 lg:p-0">
+          <input
+            type="text"
+            class="bg-transparent border border-main-text w-full py-2 px-4 outline-none"
+            placeholder="Search the world of recipes..."
+            v-model="searchInput"
+          />
+          <button
+            @click="performSearch"
+            class="lg:absolute right-0 top-0 bottom-0 px-4 py-2 mt-4 lg:mt-0 bg-main-text text-white hover:bg-secondary-dark transition-all duration-300 ease-in-out"
+          >
+            Search
+          </button>
+        </div>
       </div>
       <div
         class="flex-shrink-0 md:border-b-0 border-main-text p-10 flex flex-col items-center justify-center gap-6 text-lg font-black uppercase"
@@ -93,12 +127,8 @@ onMounted(() => {
           </NuxtLink>
         </li>
         <li>
-          <NuxtLink
-            to="/special-recipes"
-            exact-active-class="active-link"
-            class="nav-link"
-          >
-            <BaseButton href="/special-recipes">special recipes</BaseButton>
+          <NuxtLink to="/" exact-active-class="active-link" class="nav-link">
+            <BaseButton href="/">special recipes</BaseButton>
           </NuxtLink>
         </li>
         <li v-if="!isLoggedIn">
@@ -136,6 +166,11 @@ onMounted(() => {
   </header>
 </template>
 
+<style scoped>
+.inactive-link {
+  background-color: transparent;
+}
+</style>
 <style scoped>
 .inactive-link {
   background-color: transparent;
