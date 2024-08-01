@@ -292,7 +292,8 @@ const submitReview = async () => {
         ></textarea>
         <button
           type="submit"
-          class="mt-2 bg-main-text hover:bg-secondary-dark text-white text-lg py-2 px-4 transition-all duration-300 ease-in-out"
+          :disabled="newReview.trim() === ''"
+          class="mt-2 bg-main-text hover:bg-secondary-dark text-white text-lg py-2 px-4 transition-all duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Submit Review
         </button>

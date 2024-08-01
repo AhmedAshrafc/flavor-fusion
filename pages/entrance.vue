@@ -59,7 +59,10 @@ const handleSubmit = async () => {
       );
 
       if (user) {
-        localStorage.setItem("user", JSON.stringify(user));
+        const { password, confirmPassword, ...userWithoutSensitiveData } = user;
+
+        localStorage.setItem("user", JSON.stringify(userWithoutSensitiveData));
+
         toast.add({
           severity: "success",
           summary: "Welcome back!",

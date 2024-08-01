@@ -68,8 +68,11 @@ const openEditModal = () => {
 
 const saveChanges = async () => {
   try {
+    if (!user.value?.id) {
+      throw new Error("User ID is missing");
+    }
     const response = await axios.put(
-      `https://app.interimapi.com/api/v1/8aecf488-4e4d-487e-aa1b-7a3f6abacdfc/users/11`,
+      `https://app.interimapi.com/api/v1/8aecf488-4e4d-487e-aa1b-7a3f6abacdfc/users/${user.value.id}`,
       editUser,
       {
         headers: {
@@ -98,8 +101,11 @@ const saveChanges = async () => {
 
 const deleteAccount = async () => {
   try {
+    if (!user.value?.id) {
+      throw new Error("User ID is missing");
+    }
     await axios.delete(
-      `https://app.interimapi.com/api/v1/8aecf488-4e4d-487e-aa1b-7a3f6abacdfc/users/11`,
+      `https://app.interimapi.com/api/v1/8aecf488-4e4d-487e-aa1b-7a3f6abacdfc/users/${user.value.id}`,
       {
         headers: {
           Authorization: `Bearer ${user.value.token}`,

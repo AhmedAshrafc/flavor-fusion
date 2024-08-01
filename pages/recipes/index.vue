@@ -88,8 +88,7 @@ onMounted(async () => {
         <div
           v-for="recipe in recipes"
           :key="recipe.id"
-          class="border border-main-text rounded-lg flex flex-col items-center gap-6 p-6 cursor-pointer mt-10"
-          @click="() => router.push(`/recipes/${recipe.id}`)"
+          class="border border-main-text rounded-lg flex flex-col items-center gap-6 p-6 mt-10"
         >
           <h3 class="font-black uppercase text-2xl md:text-3xl text-center">
             {{ recipe.name }}
@@ -103,6 +102,11 @@ onMounted(async () => {
           <p class="text-center text-lg md:text-xl lg:text-2xl">
             {{ recipe.description || "No description available" }}
           </p>
+          <NuxtLink
+            @click="() => router.push(`/recipes/${recipe.id}`)"
+            class="text-main-text underline cursor-pointer"
+            >View Recipe</NuxtLink
+          >
         </div>
       </template>
     </div>
