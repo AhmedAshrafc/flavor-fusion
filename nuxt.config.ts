@@ -9,7 +9,7 @@ export default defineNuxtConfig({
       apiBaseUrl: process.env.API_BASE_URL || "http://localhost:3000",
     },
   },
-  modules: ["@primevue/nuxt-module", "@nuxt/ui"],
+  modules: ["@primevue/nuxt-module", "@nuxt/ui", "@pinia/nuxt"],
   primevue: {
     options: {
       theme: {
