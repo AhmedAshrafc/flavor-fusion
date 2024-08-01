@@ -38,7 +38,10 @@ const performSearch = async () => {
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     const data = await response.json();
     searchResultsStore.setSearchResults(data);
-    router.push("/search-results");
+    router.push({
+      path: "/search-results",
+      query: { term: searchInput.value },
+    });
     searchInput.value = "";
   } catch (error) {
     console.error("Failed to fetch recipes:", error);
@@ -74,18 +77,20 @@ onMounted(() => {
         <h1 class="text-[4rem] font-black tracking-widest">flavor fusion</h1>
         <h2 class="text-[1.5rem]">the greatest egyptian recipes</h2>
         <div class="relative w-full lg:w-1/2 mt-4 p-6 lg:p-0">
-          <input
-            type="text"
-            class="bg-transparent border border-main-text w-full py-2 px-4 outline-none"
-            placeholder="Search the world of recipes..."
-            v-model="searchInput"
-          />
-          <button
-            @click="performSearch"
-            class="lg:absolute right-0 top-0 bottom-0 px-4 py-2 mt-4 lg:mt-0 bg-main-text text-white hover:bg-secondary-dark transition-all duration-300 ease-in-out"
-          >
-            Search
-          </button>
+          <form @submit.prevent="performSearch">
+            <input
+              type="text"
+              class="bg-transparent border border-main-text w-full py-2 px-4 outline-none"
+              placeholder="Search the world of recipes..."
+              v-model="searchInput"
+            />
+            <button
+              type="submit"
+              class="lg:absolute right-0 top-0 bottom-0 px-4 py-2 mt-4 lg:mt-0 bg-main-text text-white hover:bg-secondary-dark transition-all duration-300 ease-in-out"
+            >
+              Search
+            </button>
+          </form>
         </div>
       </div>
       <div

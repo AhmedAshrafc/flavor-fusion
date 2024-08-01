@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useRoute } from "vue-router";
+
 defineProps<{
   recipes: Array<any>;
 }>();
@@ -6,13 +8,42 @@ defineProps<{
 import { useSearchResultsStore } from "~/stores/searchResultsStore";
 
 const router = useRouter();
+const route = useRoute();
 const searchResultsStore = useSearchResultsStore();
 const recipes = computed(() => searchResultsStore.results);
+
+const searchTerm = computed(() => route.query.term || "");
+
+useHead({
+  title: `FlavorFusion | Search Results For ${searchTerm.value}`,
+  meta: [
+    {
+      name: "description",
+      content:
+        "Explore FlavorFusion, where we bring the best flavors to your table. Discover recipes, tips, and more!",
+    },
+  ],
+});
+
+useSeoMeta({
+  title: `FlavorFusion | Search Results For ${searchTerm.value}`,
+  ogTitle: `FlavorFusion | Search Results For ${searchTerm.value}`,
+  description:
+    "Discover FlavorFusion, your ultimate destination for delicious recipes and flavor inspiration. Dive into a world of culinary delights.",
+  ogDescription:
+    "FlavorFusion offers a variety of recipes, cooking tips, and flavor inspirations to elevate your culinary experience.",
+});
 </script>
 
 <template>
   <section>
+    <div v-if="recipes.length === 0" class="p-10 md:p-20 text-center">
+      <p class="text-xl md:text-2xl lg:text-3xl text-main-text">
+        Sorry! No recipe found with this search term.
+      </p>
+    </div>
     <div
+      v-else
       class="p-10 md:p-20 border-b border-main-text grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
     >
       <div
