@@ -1,18 +1,10 @@
-function isAuthenticated(): boolean {
-  return Boolean(localStorage.getItem("user"));
-}
+import { defineNuxtRouteMiddleware, navigateTo } from "nuxt/app";
 
 export default defineNuxtRouteMiddleware((to, from) => {
-  const authRequired = ["/profile"];
-  const guestRequired = ["/entrance", "/join"];
-
-  const authenticated = isAuthenticated();
-
-  if (authRequired.includes(to.path) && !authenticated) {
-    return navigateTo("/");
-  }
-
-  if (guestRequired.includes(to.path) && authenticated) {
-    return navigateTo("/");
+  if (process.client) {
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    if (user.role !== "chef") {
+      return navigateTo("/");
+    }
   }
 });
