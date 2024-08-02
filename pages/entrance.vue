@@ -100,19 +100,23 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <section class="p-20 border-b border-main-text">
+  <section
+    class="p-20 border-b border-main-text"
+    :style="{ borderColor: 'var(--border-color)' }"
+  >
     <h2
       class="font-black text-center uppercase text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[7rem] leading-tight"
     >
-      Welcome to <span class="text-main-text">Cooking Enthusiasts</span>
+      Welcome to Cooking Enthusiasts
     </h2>
 
-    <div class="border border-main-text p-10">
+    <div
+      class="border border-main-text p-10 mt-10"
+      :style="{ borderColor: 'var(--border-color)' }"
+    >
       <form @submit.prevent="handleSubmit" class="flex flex-col gap-4">
         <div class="flex flex-col gap-2">
-          <label for="email" class="block text-lg font-bold text-gray-700 mb-2"
-            >Email</label
-          >
+          <label for="email" class="block text-lg font-bold mb-2">Email</label>
           <input
             v-model="form.email"
             type="email"
@@ -123,9 +127,7 @@ const handleSubmit = async () => {
           />
         </div>
         <div class="flex flex-col gap-2">
-          <label
-            for="password"
-            class="block text-lg font-bold text-gray-700 mb-2"
+          <label for="password" class="block text-lg font-bold mb-2"
             >Password</label
           >
           <input
@@ -145,9 +147,9 @@ const handleSubmit = async () => {
           Enter
         </button>
       </form>
-      <p class="text-center mt-10 text-gray-600">
+      <p class="text-center mt-10">
         Don't have an account?
-        <NuxtLink to="/join" class="text-main-text font-bold">Join Us</NuxtLink>
+        <NuxtLink to="/join" class="font-bold">Join Us</NuxtLink>
       </p>
     </div>
   </section>

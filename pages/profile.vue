@@ -167,7 +167,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="p-10 md:p-20 border-b border-main-text">
+  <section
+    class="p-10 md:p-20 border-b border-main-text"
+    :style="{ borderColor: 'var(--border-color)' }"
+  >
     <h1
       class="mb-10 text-center font-black uppercase tracking-wider text-3xl md:text-[4rem] lg:text-[5rem] leading-tight md:leading-snug lg:leading-normal"
     >

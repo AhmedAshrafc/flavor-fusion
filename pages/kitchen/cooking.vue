@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 import { useToast } from "primevue/usetoast";
@@ -9,10 +8,29 @@ definePageMeta({
   title: "Home - FlavorFusion Kitchen",
 });
 
+useHead({
+  title: "FlavorFusion | Kitchen Station (Cooking)",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Explore FlavorFusion, where we bring the best flavors to your table. Discover recipes, tips, and more!",
+    },
+  ],
+});
+
+useSeoMeta({
+  title: "FlavorFusion | Kitchen Station (Cooking)",
+  ogTitle: "FlavorFusion | Kitchen Station (Cooking)",
+  description:
+    "Discover FlavorFusion, your ultimate destination for delicious recipes and flavor inspiration. Dive into a world of culinary delights.",
+  ogDescription:
+    "FlavorFusion offers a variety of recipes, cooking tips, and flavor inspirations to elevate your culinary experience.",
+});
+
 const toast = useToast();
 const router = useRouter();
 
-// Define the initial form data structure
 const initialForm = {
   name: "",
   description: "",
@@ -26,17 +44,15 @@ const initialForm = {
   cuisine: "",
   caloriesPerServing: 0,
   tags: "",
-  userId: 0, // To be populated with the user ID
+  userId: 0,
   postedBy: "",
   reviewCount: 0,
   mealType: "",
   rating: 0,
 };
 
-// Define the form data structure
 const form = ref({ ...initialForm });
 
-// Fetch the current user's information from local storage
 const getUserInfo = () => {
   const userString = localStorage.getItem("user");
   if (userString) {
@@ -45,22 +61,18 @@ const getUserInfo = () => {
   return null;
 };
 
-// Populate the form with the current user's information
 onMounted(() => {
   const user = getUserInfo();
   if (user) {
     form.value.userId = user.id;
     form.value.postedBy = user.name;
-    // Optionally, you can pre-fill some other form fields if necessary
   }
 });
 
-// Function to reset the form
 const resetForm = () => {
   form.value = { ...initialForm };
 };
 
-// Function to handle form submission
 const handleSubmit = async () => {
   try {
     await axios.post(
@@ -73,8 +85,8 @@ const handleSubmit = async () => {
       detail: "Recipe added successfully!",
       life: 5000,
     });
-    resetForm(); // Clear the form fields
-    // router.push("/somepage"); // Replace with the appropriate route
+    resetForm();
+    // router.push("/somepage");
   } catch (error) {
     console.error("Error adding recipe:", error);
   }

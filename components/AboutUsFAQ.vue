@@ -1,5 +1,8 @@
 <template>
-  <section class="p-10 md:p-20 border-b border-main-text">
+  <section
+    class="p-10 md:p-20 border-b border-main-text"
+    :style="{ borderColor: 'var(--border-color)' }"
+  >
     <h1
       class="flex mb-6 items-center justify-center gap-6 font-black text-center uppercase text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[7rem] leading-tight"
     >

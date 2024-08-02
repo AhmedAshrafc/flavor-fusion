@@ -108,18 +108,22 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <section class="p-20 border-b border-main-text">
+  <section
+    class="p-20 border-b border-main-text"
+    :style="{ borderColor: 'var(--border-color)' }"
+  >
     <h2
       class="font-black text-center uppercase text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[7rem] leading-tight"
     >
       Join Us
     </h2>
-    <div class="border border-main-text p-10">
+    <div
+      class="border border-main-text p-10 mt-10"
+      :style="{ borderColor: 'var(--border-color)' }"
+    >
       <form @submit.prevent="handleSubmit" class="flex flex-col gap-4">
         <div class="flex flex-col gap-2">
-          <label for="name" class="block text-lg font-bold text-gray-700 mb-2"
-            >Name</label
-          >
+          <label for="name" class="block text-lg font-bold mb-2">Name</label>
           <input
             v-model="form.name"
             type="text"
@@ -130,9 +134,7 @@ const handleSubmit = async () => {
           />
         </div>
         <div class="flex flex-col gap-2">
-          <label for="email" class="block text-lg font-bold text-gray-700 mb-2"
-            >Email</label
-          >
+          <label for="email" class="block text-lg font-bold mb-2">Email</label>
           <input
             v-model="form.email"
             type="email"
@@ -143,9 +145,7 @@ const handleSubmit = async () => {
           />
         </div>
         <div class="flex flex-col gap-2">
-          <label
-            for="password"
-            class="block text-lg font-bold text-gray-700 mb-2"
+          <label for="password" class="block text-lg font-bold mb-2"
             >Password</label
           >
           <input
@@ -158,9 +158,7 @@ const handleSubmit = async () => {
           />
         </div>
         <div class="flex flex-col gap-2">
-          <label
-            for="confirm-password"
-            class="block text-lg font-bold text-gray-700 mb-2"
+          <label for="confirm-password" class="block text-lg font-bold mb-2"
             >Confirm Password</label
           >
           <input
@@ -173,9 +171,7 @@ const handleSubmit = async () => {
           />
         </div>
         <div class="flex flex-col gap-2">
-          <label for="role" class="block text-lg font-bold text-gray-700 mb-2"
-            >Role</label
-          >
+          <label for="role" class="block text-lg font-bold mb-2">Role</label>
           <select
             v-model="form.role"
             id="role"
@@ -186,7 +182,7 @@ const handleSubmit = async () => {
           </select>
         </div>
         <div class="flex flex-col gap-2">
-          <label for="phone" class="block text-lg font-bold text-gray-700 mb-2"
+          <label for="phone" class="block text-lg font-bold mb-2"
             >Phone Number</label
           >
           <input
@@ -199,9 +195,7 @@ const handleSubmit = async () => {
           />
         </div>
         <div class="flex flex-col gap-2">
-          <label
-            for="country"
-            class="block text-lg font-bold text-gray-700 mb-2"
+          <label for="country" class="block text-lg font-bold mb-2"
             >Country</label
           >
           <input
@@ -214,9 +208,7 @@ const handleSubmit = async () => {
           />
         </div>
         <div class="flex flex-col gap-2">
-          <label for="city" class="block text-lg font-bold text-gray-700 mb-2"
-            >City</label
-          >
+          <label for="city" class="block text-lg font-bold mb-2">City</label>
           <input
             v-model="form.city"
             type="text"
@@ -227,9 +219,7 @@ const handleSubmit = async () => {
           />
         </div>
         <div class="flex flex-col gap-2">
-          <label
-            for="address"
-            class="block text-lg font-bold text-gray-700 mb-2"
+          <label for="address" class="block text-lg font-bold mb-2"
             >Address</label
           >
           <input
@@ -242,9 +232,7 @@ const handleSubmit = async () => {
           />
         </div>
         <div class="flex flex-col gap-2">
-          <label for="bio" class="block text-lg font-bold text-gray-700 mb-2"
-            >Bio</label
-          >
+          <label for="bio" class="block text-lg font-bold mb-2">Bio</label>
           <textarea
             v-model="form.bio"
             id="bio"
@@ -260,11 +248,9 @@ const handleSubmit = async () => {
           Join Us
         </button>
       </form>
-      <p class="text-center mt-10 text-gray-600">
+      <p class="text-center mt-10">
         Already have an account?
-        <NuxtLink to="/entrance" class="text-main-text font-bold"
-          >Login</NuxtLink
-        >
+        <NuxtLink to="/entrance" class="font-bold">Login</NuxtLink>
       </p>
     </div>
   </section>

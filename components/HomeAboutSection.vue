@@ -1,5 +1,8 @@
 <template>
-  <section class="border-b border-main-text">
+  <section
+    class="border-b border-main-text"
+    :style="{ borderColor: 'var(--border-color)' }"
+  >
     <div class="p-20">
       <div class="flex flex-col lg:flex-row items-center">
         <div class="">

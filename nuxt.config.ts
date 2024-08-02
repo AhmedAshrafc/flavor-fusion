@@ -9,7 +9,22 @@ export default defineNuxtConfig({
       apiBaseUrl: process.env.API_BASE_URL || "http://localhost:3000",
     },
   },
-  modules: ["@primevue/nuxt-module", "@nuxt/ui", "@pinia/nuxt"],
+  modules: [
+    "@primevue/nuxt-module",
+    "@nuxt/ui",
+    "@pinia/nuxt",
+    "@nuxtjs/color-mode",
+  ],
+  colorMode: {
+    preference: "light", // default value of $colorMode.preference
+    fallback: "light", // fallback value if not system preference found
+    hid: "nuxt-color-mode-script",
+    globalName: "__NUXT_COLOR_MODE__",
+    componentName: "ColorScheme",
+    classPrefix: "",
+    classSuffix: "-mode",
+    storageKey: "nuxt-color-mode",
+  },
   primevue: {
     options: {
       theme: {

@@ -1,6 +1,9 @@
 <template>
   <footer class="py-10 pb-0 md:px-8">
-    <div class="flex flex-col md:flex-row border-b border-main-text">
+    <div
+      class="flex flex-col md:flex-row border-b border-main-text"
+      :style="{ borderColor: 'var(--border-color)' }"
+    >
       <div class="flex flex-col gap-10 mb-10">
         <h2
           class="font-black text-center md:text-left uppercase text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[7rem] leading-tight"

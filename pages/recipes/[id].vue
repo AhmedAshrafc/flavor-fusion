@@ -207,13 +207,24 @@ const submitReview = async () => {
 </script>
 
 <template>
-  <section class="p-10 md:p-20 border-b border-main-text">
+  <section
+    class="p-10 md:p-20 border-b border-main-text"
+    :style="{ borderColor: 'var(--border-color)' }"
+  >
     <h2
       v-if="recipe"
       class="font-black text-center uppercase text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[7rem] leading-tight"
     >
-      {{ recipe.name }}
+      {{ recipe?.name }}
     </h2>
+    <div class="text-center">
+      <Chip class="!py-1 !px-6 !bg-rose-600">
+        <span class="text-center block text-xl">
+          Recipe made by Chef:
+          <span class="font-bold"> {{ recipe?.postedBy }}</span></span
+        >
+      </Chip>
+    </div>
     <div v-if="error" class="text-center text-red-600">
       <p>{{ error }}</p>
     </div>
@@ -307,6 +318,7 @@ const submitReview = async () => {
           v-for="review in reviews"
           :key="review.id"
           class="border border-main-text p-4 rounded-md"
+          :style="{ borderColor: 'var(--border-color)' }"
         >
           <h3 class="font-bold">{{ review.user_name }}</h3>
           <p>{{ review.review }}</p>

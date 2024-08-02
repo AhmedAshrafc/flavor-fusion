@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --border-color: #121214; /* Default border color for light mode */
+}
+
+.dark {
+  --border-color: #ffffff; /* Border color for dark mode */
+}
+
+.sepia {
+  --border-color: #433422; /* Border color for sepia mode */
+}
+
 body {
   font-family: "Teko", sans-serif;
   background-color: #e2dcd8;
@@ -12,4 +24,19 @@ body {
 ::selection {
   background-color: #defffa;
   color: #555555;
+}
+
+.light body {
+  background-color: #e2dcd8;
+  color: #121214;
+}
+
+.dark body {
+  background-color: #091a28;
+  color: #ebf4f1;
+}
+
+.sepia body {
+  background-color: #f1e7d0;
+  color: #433422;
 }

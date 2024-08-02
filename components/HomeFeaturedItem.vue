@@ -2,6 +2,7 @@
   <section>
     <div
       class="flex flex-col items-center gap-4 md:gap-10 text-center py-20 border-b border-main-text"
+      :style="{ borderColor: 'var(--border-color)' }"
     >
       <h1
         class="font-black uppercase tracking-widest text-3xl md:text-[4rem] lg:text-[6rem]"

@@ -1,5 +1,8 @@
 <template>
-  <section class="py-10 md:px-8 lg:px-16 border-b border-main-text">
+  <section
+    class="py-10 md:px-8 lg:px-16 border-b border-main-text"
+    :style="{ borderColor: 'var(--border-color)' }"
+  >
     <div class="border-b border-main-text mb-10">
       <h2
         class="font-black text-center uppercase text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[7rem] leading-tight"
@@ -11,6 +14,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
       <div
         class="border border-main-text rounded-lg flex flex-col items-center gap-6 px-6 py-20"
+        :style="{ borderColor: 'var(--border-color)' }"
       >
         <h3
           class="font-black uppercase text-2xl md:text-3xl lg:text-[3rem] flex flex-col items-center gap-2"
@@ -26,6 +30,7 @@
       </div>
       <div
         class="border border-main-text rounded-lg flex flex-col items-center gap-6 px-6 py-20"
+        :style="{ borderColor: 'var(--border-color)' }"
       >
         <h3
           class="font-black uppercase text-2xl md:text-3xl lg:text-[3rem] flex flex-col items-center gap-2"
@@ -41,6 +46,7 @@
       </div>
       <div
         class="border border-main-text rounded-lg flex flex-col items-center gap-6 px-6 py-20"
+        :style="{ borderColor: 'var(--border-color)' }"
       >
         <h3
           class="font-black uppercase text-2xl md:text-3xl lg:text-[3rem] flex flex-col items-center gap-2"

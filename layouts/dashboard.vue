@@ -3,26 +3,6 @@ definePageMeta({
   middleware: "auth",
 });
 
-useHead({
-  title: "FlavorFusion | Kitchen",
-  meta: [
-    {
-      name: "description",
-      content:
-        "Explore FlavorFusion, where we bring the best flavors to your table. Discover recipes, tips, and more!",
-    },
-  ],
-});
-
-useSeoMeta({
-  title: "FlavorFusion | Kitchen",
-  ogTitle: "FlavorFusion | Kitchen",
-  description:
-    "Discover FlavorFusion, your ultimate destination for delicious recipes and flavor inspiration. Dive into a world of culinary delights.",
-  ogDescription:
-    "FlavorFusion offers a variety of recipes, cooking tips, and flavor inspirations to elevate your culinary experience.",
-});
-
 const isOpen = ref(true);
 
 const toggleSidebar = () => {
@@ -36,16 +16,21 @@ const sidebarClasses = computed(() => ({
 </script>
 
 <template>
-  <div class="m-10 border border-main-text container mx-auto">
+  <div
+    class="m-10 border border-main-text container mx-auto"
+    :style="{ borderColor: 'var(--border-color)' }"
+  >
     <AppHeader />
 
-    <div class="flex flex-col md:flex-row p-10 border-b border-main-text">
-      <!-- Sidebar -->
+    <div
+      class="flex flex-col md:flex-row p-10 border-b border-main-text"
+      :style="{ borderColor: 'var(--border-color)' }"
+    >
+      <!-- the sidebar -->
       <div
         :class="sidebarClasses"
         class="bg-gray-800 text-white min-h-screen transition-width duration-300 relative"
       >
-        <!-- Toggle Button -->
         <button
           @click="toggleSidebar"
           class="flex items-center justify-center absolute top-4 -right-5 z-10 bg-[#30d599] text-black p-2 rounded-full"
@@ -56,7 +41,7 @@ const sidebarClasses = computed(() => ({
           ></i>
         </button>
 
-        <!-- Sidebar Links -->
+        <!-- sidebar links -->
         <div class="mt-16 p-4">
           <ul>
             <li class="mb-2 relative">
@@ -96,8 +81,11 @@ const sidebarClasses = computed(() => ({
         </div>
       </div>
 
-      <!-- Main Content -->
-      <div class="flex-1 p-8 border border-main-text">
+      <!-- main content -->
+      <div
+        class="flex-1 p-8 border border-main-text"
+        :style="{ borderColor: 'var(--border-color)' }"
+      >
         <NuxtPage />
       </div>
     </div>

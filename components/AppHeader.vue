@@ -60,26 +60,40 @@ onMounted(() => {
   checkAuthStatus();
   currentDate.value = dayjs().format("dddd, MMMM D, YYYY");
 });
+
+const colorMode = useColorMode();
+
+const logoSrc = computed(() => {
+  if (colorMode.preference === "dark" || colorMode.preference === "system") {
+    return "/images/flavorfusion-logo-light.png";
+  } else if (colorMode.preference === "light") {
+    return "/images/flavorfusion-logo-dark.png";
+  } else {
+    // Default or other modes, adjust as necessary
+    return "/images/flavorfusion-logo-dark.png";
+  }
+});
+
+// console.log(colorMode.preference);
 </script>
 
 <template>
   <header>
     <div
       class="flex flex-col md:flex-row items-stretch border-b border-main-text"
+      :style="{ borderColor: 'var(--border-color)' }"
     >
       <div
         class="flex-shrink-0 border-b md:border-r md:border-b-0 border-main-text p-10 flex items-center justify-center"
+        :style="{ borderColor: 'var(--border-color)' }"
       >
         <NuxtLink to="/" exact-active-class="inactive-link">
-          <img
-            src="/images/flavorfusion-logo.png"
-            alt="Flavor Fusion Logo"
-            class="w-48"
-          />
+          <img :src="logoSrc" alt="Flavor Fusion Logo" class="w-48" />
         </NuxtLink>
       </div>
       <div
         class="flex-1 border-b md:border-r md:border-b-0 border-main-text py-10 md:py-6 flex flex-col items-center justify-center text-center uppercase"
+        :style="{ borderColor: 'var(--border-color)' }"
       >
         <span class="text-sm md:text-base">{{ currentDate }}</span>
         <h1 class="text-[4rem] font-black tracking-widest">flavor fusion</h1>
@@ -89,13 +103,15 @@ onMounted(() => {
             <input
               type="text"
               class="bg-transparent border border-main-text w-full py-2 px-4 outline-none"
+              :style="{ borderColor: 'var(--border-color)' }"
               placeholder="Search the world of recipes..."
               v-model="searchInput"
               v-tooltip.top="'Search for recipes by name'"
             />
             <button
               type="submit"
-              class="lg:absolute right-0 top-0 bottom-0 px-4 py-2 mt-4 lg:mt-0 bg-main-text text-white hover:bg-secondary-dark transition-all duration-300 ease-in-out"
+              class="lg:absolute right-0 top-0 bottom-0 px-4 py-2 mt-4 lg:mt-0 bg-main-text text-white hover:bg-secondary-dark transition-all duration-300 ease-in-out border"
+              :style="{ borderColor: 'var(--border-color)' }"
             >
               Search
             </button>
@@ -104,11 +120,23 @@ onMounted(() => {
       </div>
       <div
         class="flex-shrink-0 md:border-b-0 border-main-text p-10 flex flex-col items-center justify-center gap-6 text-lg font-black uppercase"
+        :style="{ borderColor: 'var(--border-color)' }"
       >
         <span>recipes Market</span>
         <div class="flex items-center justify-center gap-4">
           <img src="/images/egypt.png" alt="Egypt Flag" class="w-6" />
           <span>egypt Market</span>
+        </div>
+        <div class="w-full">
+          <select
+            v-model="$colorMode.preference"
+            class="text-white outline-none w-full text-center"
+          >
+            <option value="system">System</option>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+            <option value="sepia">Sepia</option>
+          </select>
         </div>
       </div>
     </div>
@@ -116,6 +144,7 @@ onMounted(() => {
     <nav>
       <ul
         class="border-b border-main-text uppercase font-black flex flex-col gap-8 py-10 md:flex-row flex-wrap items-center justify-between md:py-6 md:px-8"
+        :style="{ borderColor: 'var(--border-color)' }"
       >
         <li>
           <NuxtLink to="/" exact-active-class="active-link" class="nav-link">

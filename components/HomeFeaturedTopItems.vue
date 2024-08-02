@@ -39,7 +39,10 @@ const responsiveOptions = [
 </script>
 
 <template>
-  <section class="py-10 md:px-8 lg:px-16 border-b border-main-text">
+  <section
+    class="py-10 md:px-8 lg:px-16 border-b border-main-text"
+    :style="{ borderColor: 'var(--border-color)' }"
+  >
     <div class="border-b border-main-text mb-10">
       <h2
         class="font-black text-center uppercase text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[7rem] leading-tight"
@@ -62,6 +65,7 @@ const responsiveOptions = [
         <template #item="slotProps">
           <div
             class="border border-main-text rounded-lg flex flex-col items-center gap-6 p-6 mr-10"
+            :style="{ borderColor: 'var(--border-color)' }"
           >
             <h3
               class="font-black uppercase text-2xl md:text-3xl lg:text-[3rem]"

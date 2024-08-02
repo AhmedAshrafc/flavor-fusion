@@ -49,7 +49,10 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section class="p-10 md:p-20 border-b border-main-text">
+  <section
+    class="p-10 md:p-20 border-b border-main-text"
+    :style="{ borderColor: 'var(--border-color)' }"
+  >
     <h2
       class="font-black text-center uppercase text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[7rem] leading-tight"
     >
@@ -89,6 +92,7 @@ onMounted(async () => {
           v-for="recipe in recipes"
           :key="recipe.id"
           class="border border-main-text rounded-lg flex flex-col items-center gap-6 p-6 mt-10"
+          :style="{ borderColor: 'var(--border-color)' }"
         >
           <h3 class="font-black uppercase text-2xl md:text-3xl text-center">
             {{ recipe.name }}
@@ -104,7 +108,7 @@ onMounted(async () => {
           </p>
           <NuxtLink
             @click="() => router.push(`/recipes/${recipe.id}`)"
-            class="text-main-text underline cursor-pointer"
+            class="underline cursor-pointer"
             >View Recipe</NuxtLink
           >
         </div>

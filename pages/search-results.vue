@@ -45,11 +45,13 @@ useSeoMeta({
     <div
       v-else
       class="p-10 md:p-20 border-b border-main-text grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
+      :style="{ borderColor: 'var(--border-color)' }"
     >
       <div
         v-for="recipe in recipes"
         :key="recipe.id"
         class="border border-main-text rounded-lg flex flex-col items-center gap-6 p-6 mt-10"
+        :style="{ borderColor: 'var(--border-color)' }"
       >
         <h3 class="font-black uppercase text-2xl md:text-3xl text-center">
           {{ recipe.name }}
@@ -65,7 +67,7 @@ useSeoMeta({
         </p>
         <NuxtLink
           @click="() => router.push(`/recipes/${recipe.id}`)"
-          class="text-main-text underline cursor-pointer"
+          class="underline cursor-pointer"
           >View Recipe</NuxtLink
         >
       </div>

@@ -1,10 +1,29 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
 import { useData } from "@/composables/useData";
 
 definePageMeta({
   layout: "dashboard",
   title: "Home - FlavorFusion Kitchen",
+});
+
+useHead({
+  title: "FlavorFusion | Kitchen Home",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Explore FlavorFusion, where we bring the best flavors to your table. Discover recipes, tips, and more!",
+    },
+  ],
+});
+
+useSeoMeta({
+  title: "FlavorFusion | Kitchen Home",
+  ogTitle: "FlavorFusion | Kitchen Home",
+  description:
+    "Discover FlavorFusion, your ultimate destination for delicious recipes and flavor inspiration. Dive into a world of culinary delights.",
+  ogDescription:
+    "FlavorFusion offers a variety of recipes, cooking tips, and flavor inspirations to elevate your culinary experience.",
 });
 
 const { recipes, reviews, favorites, fetchData } = useData();
@@ -197,7 +216,6 @@ onMounted(async () => {
   border: 1px solid #e0e0e0;
   padding: 20px;
   border-radius: 8px;
-  background: #fff;
   text-align: center;
 }
 </style>
