@@ -6,16 +6,25 @@ import { useSearchResultsStore } from "~/stores/searchResultsStore";
 
 const currentDate = ref("");
 const isLoggedIn = ref(false);
+const isChef = ref(false);
 
 const router = useRouter();
 
 const checkAuthStatus = () => {
-  isLoggedIn.value = localStorage.getItem("user") !== null;
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  if (user && user.role) {
+    isLoggedIn.value = true;
+    isChef.value = user.role === "chef";
+  } else {
+    isLoggedIn.value = false;
+    isChef.value = false;
+  }
 };
 
 const handleLogout = () => {
   localStorage.removeItem("user");
   isLoggedIn.value = false;
+  isChef.value = false;
   router.push("/entrance");
   toast.add({
     severity: "success",
@@ -26,7 +35,6 @@ const handleLogout = () => {
 };
 
 const searchResultsStore = useSearchResultsStore();
-
 const searchInput = ref("");
 
 const performSearch = async () => {
@@ -83,6 +91,7 @@ onMounted(() => {
               class="bg-transparent border border-main-text w-full py-2 px-4 outline-none"
               placeholder="Search the world of recipes..."
               v-model="searchInput"
+              v-tooltip.top="'Search for recipes by name'"
             />
             <button
               type="submit"
@@ -154,8 +163,15 @@ onMounted(() => {
             <BaseButton href="/join">join Us</BaseButton>
           </NuxtLink>
         </li>
-        <li v-if="isLoggedIn">
-          <BaseButton @click="handleLogout">Logout</BaseButton>
+        <li v-if="isLoggedIn && isChef">
+          <NuxtLink
+            to="/kitchen"
+            exact-active-class="active-link"
+            class="nav-link"
+            v-tooltip.top="'Only accessible by chefs'"
+          >
+            <BaseButton href="/kitchen">Kitchen</BaseButton>
+          </NuxtLink>
         </li>
         <li v-if="isLoggedIn">
           <NuxtLink
@@ -166,16 +182,14 @@ onMounted(() => {
             <BaseButton href="/profile">Profile</BaseButton>
           </NuxtLink>
         </li>
+        <li v-if="isLoggedIn">
+          <BaseButton @click="handleLogout">Logout</BaseButton>
+        </li>
       </ul>
     </nav>
   </header>
 </template>
 
-<style scoped>
-.inactive-link {
-  background-color: transparent;
-}
-</style>
 <style scoped>
 .inactive-link {
   background-color: transparent;
