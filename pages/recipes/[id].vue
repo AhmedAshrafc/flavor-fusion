@@ -274,6 +274,10 @@ const submitReview = async () => {
           <p class="text-lg mt-4 italic">
             <strong>Rating (how delicious it is):</strong> {{ recipe.rating }}
           </p>
+          <p class="text-lg mt-4 italic">
+            <strong>Tags: </strong>
+            <Chip :label="recipe.tags" class="!py-1 !px-6 !bg-rose-600" />
+          </p>
         </div>
       </div>
     </div>
