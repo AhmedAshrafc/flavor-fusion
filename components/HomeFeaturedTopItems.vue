@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import axios from "axios";
+import { useRoute } from "vue-router";
 
 interface Recipe {
   id: number;
@@ -75,6 +76,11 @@ const responsiveOptions = [
             <p class="text-center text-lg md:text-xl lg:text-2xl">
               {{ slotProps.data.description || "No description available" }}
             </p>
+            <NuxtLink
+              @click="() => $router.push(`/recipes/${slotProps.data.id}`)"
+              class="text-main-text underline cursor-pointer"
+              >View Recipe</NuxtLink
+            >
           </div>
         </template>
       </Carousel>
