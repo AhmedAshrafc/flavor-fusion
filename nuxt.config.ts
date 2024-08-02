@@ -14,7 +14,19 @@ export default defineNuxtConfig({
     "@nuxt/ui",
     "@pinia/nuxt",
     "@nuxtjs/color-mode",
+    "@nuxtjs/i18n",
   ],
+  i18n: {
+    // Module Options
+    lazy: true,
+    langDir: "locales",
+    strategy: "prefix_except_default",
+    defaultLocale: "en", // Default Language
+    locales: [
+      { code: "ar", iso: "ar-EG", file: "ar.json" },
+      { code: "en", iso: "en-US", file: "en.json" },
+    ],
+  },
   colorMode: {
     preference: "light", // default value of $colorMode.preference
     fallback: "light", // fallback value if not system preference found
