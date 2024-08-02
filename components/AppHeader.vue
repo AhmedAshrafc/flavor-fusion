@@ -4,6 +4,9 @@ import { useToast } from "primevue/usetoast";
 const toast = useToast();
 import { useSearchResultsStore } from "~/stores/searchResultsStore";
 
+const switchLocalePath = useSwitchLocalePath();
+const { t } = useI18n();
+
 const currentDate = ref("");
 const isLoggedIn = ref(false);
 const isChef = ref(false);
@@ -28,8 +31,8 @@ const handleLogout = () => {
   router.push("/entrance");
   toast.add({
     severity: "success",
-    summary: "Goodbye! Until next time!",
-    detail: "Logout successful",
+    summary: t("goodbyeMessage"),
+    detail: t("logoutSuccess"),
     life: 5000,
   });
 };
@@ -69,7 +72,6 @@ const logoSrc = computed(() => {
   } else if (colorMode.preference === "light") {
     return "/images/flavorfusion-logo-dark.png";
   } else {
-    // Default or other modes, adjust as necessary
     return "/images/flavorfusion-logo-dark.png";
   }
 });
@@ -97,23 +99,23 @@ const logoSrc = computed(() => {
       >
         <span class="text-sm md:text-base">{{ currentDate }}</span>
         <h1 class="text-[4rem] font-black tracking-widest">flavor fusion</h1>
-        <h2 class="text-[1.5rem]">the greatest egyptian recipes</h2>
+        <h2 class="text-[1.5rem]">{{ t("recipesMarket") }}</h2>
         <div class="relative w-full lg:w-1/2 mt-4 p-6 lg:p-0">
           <form @submit.prevent="performSearch">
             <input
               type="text"
               class="bg-transparent border border-main-text w-full py-2 px-4 outline-none"
               :style="{ borderColor: 'var(--border-color)' }"
-              placeholder="Search the world of recipes..."
+              :placeholder="t('searchPlaceholder')"
               v-model="searchInput"
-              v-tooltip.top="'Search for recipes by name'"
+              v-tooltip.top="t('searchPlaceholder')"
             />
             <button
               type="submit"
               class="lg:absolute right-0 top-0 bottom-0 px-4 py-2 mt-4 lg:mt-0 bg-main-text text-white hover:bg-secondary-dark transition-all duration-300 ease-in-out border"
               :style="{ borderColor: 'var(--border-color)' }"
             >
-              Search
+              {{ t("searchButton") }}
             </button>
           </form>
         </div>
@@ -122,21 +124,47 @@ const logoSrc = computed(() => {
         class="flex-shrink-0 md:border-b-0 border-main-text p-10 flex flex-col items-center justify-center gap-6 text-lg font-black uppercase"
         :style="{ borderColor: 'var(--border-color)' }"
       >
-        <span>recipes Market</span>
+        <span>{{ t("recipesMarket") }}</span>
         <div class="flex items-center justify-center gap-4">
           <img src="/images/egypt.png" alt="Egypt Flag" class="w-6" />
-          <span>egypt Market</span>
+          <span>{{ t("egyptMarket") }}</span>
         </div>
         <div class="w-full">
+          <div class="text-center text-sm mb-2">
+            <span v-if="$colorMode.preference === 'dark'"
+              >{{ t("moonShining") }} <i class="pi pi-moon"></i
+            ></span>
+            <span v-if="$colorMode.preference === 'system'"
+              >{{ t("unsureShining") }} <i class="pi pi-spinner-dotted"></i
+            ></span>
+            <span v-if="$colorMode.preference === 'light'"
+              >{{ t("sunOut") }} <i class="pi pi-sun"></i
+            ></span>
+            <span v-if="$colorMode.preference === 'sepia'"
+              >{{ t("dusty") }} <i class="pi pi-cloud"></i
+            ></span>
+          </div>
           <select
             v-model="$colorMode.preference"
             class="text-white outline-none w-full text-center"
           >
-            <option value="system">System</option>
-            <option value="light">Light</option>
-            <option value="dark">Dark</option>
-            <option value="sepia">Sepia</option>
+            <option value="system">{{ t("system") }}</option>
+            <option value="light">{{ t("light") }}</option>
+            <option value="dark">{{ t("dark") }}</option>
+            <option value="sepia">{{ t("sepia") }}</option>
           </select>
+          <div class="flex items-center justify-center gap-2 mt-4">
+            <NuxtLink
+              :to="switchLocalePath('en')"
+              class="uppercase font-bold bg-main-text text-white py-1 px-4 hover:bg-secondary-dark transition-all duration-300 ease-in-out"
+              >English</NuxtLink
+            >
+            <NuxtLink
+              :to="switchLocalePath('ar')"
+              class="uppercase font-bold bg-main-text text-white py-1 px-4 hover:bg-secondary-dark transition-all duration-300 ease-in-out"
+              >العربية</NuxtLink
+            >
+          </div>
         </div>
       </div>
     </div>
@@ -148,7 +176,7 @@ const logoSrc = computed(() => {
       >
         <li>
           <NuxtLink to="/" exact-active-class="active-link" class="nav-link">
-            <BaseButton href="/">Home</BaseButton>
+            <BaseButton href="/">{{ t("home") }}</BaseButton>
           </NuxtLink>
         </li>
         <li>
@@ -157,7 +185,7 @@ const logoSrc = computed(() => {
             exact-active-class="active-link"
             class="nav-link"
           >
-            <BaseButton href="/about">about us</BaseButton>
+            <BaseButton href="/about">{{ t("aboutUs") }}</BaseButton>
           </NuxtLink>
         </li>
         <li>
@@ -166,12 +194,12 @@ const logoSrc = computed(() => {
             exact-active-class="active-link"
             class="nav-link"
           >
-            <BaseButton href="/recipes">recipes</BaseButton>
+            <BaseButton href="/recipes">{{ t("recipes") }}</BaseButton>
           </NuxtLink>
         </li>
         <li>
           <NuxtLink to="/" exact-active-class="active-link" class="nav-link">
-            <BaseButton href="/">special recipes</BaseButton>
+            <BaseButton href="/">{{ t("specialRecipes") }}</BaseButton>
           </NuxtLink>
         </li>
         <li v-if="!isLoggedIn">
@@ -180,7 +208,7 @@ const logoSrc = computed(() => {
             exact-active-class="active-link"
             class="nav-link"
           >
-            <BaseButton href="/entrance">entrance</BaseButton>
+            <BaseButton href="/entrance">{{ t("entrance") }}</BaseButton>
           </NuxtLink>
         </li>
         <li v-if="!isLoggedIn">
@@ -189,7 +217,7 @@ const logoSrc = computed(() => {
             exact-active-class="active-link"
             class="nav-link"
           >
-            <BaseButton href="/join">join Us</BaseButton>
+            <BaseButton href="/join">{{ t("joinUs") }}</BaseButton>
           </NuxtLink>
         </li>
         <li v-if="isLoggedIn && isChef">
@@ -199,7 +227,7 @@ const logoSrc = computed(() => {
             class="nav-link"
             v-tooltip.top="'Only accessible by chefs'"
           >
-            <BaseButton href="/kitchen">Kitchen</BaseButton>
+            <BaseButton href="/kitchen">{{ t("kitchen") }}</BaseButton>
           </NuxtLink>
         </li>
         <li v-if="isLoggedIn">
@@ -208,11 +236,11 @@ const logoSrc = computed(() => {
             exact-active-class="active-link"
             class="nav-link"
           >
-            <BaseButton href="/profile">Profile</BaseButton>
+            <BaseButton href="/profile">{{ t("profile") }}</BaseButton>
           </NuxtLink>
         </li>
         <li v-if="isLoggedIn">
-          <BaseButton @click="handleLogout">Logout</BaseButton>
+          <BaseButton @click="handleLogout">{{ t("logout") }}</BaseButton>
         </li>
       </ul>
     </nav>
