@@ -13,6 +13,19 @@ const sidebarClasses = computed(() => ({
   "w-64": isOpen.value,
   "w-20": !isOpen.value,
 }));
+
+const user = ref<any>(null);
+
+const fetchUserData = async () => {
+  const storedUser = localStorage.getItem("user");
+  if (storedUser) {
+    user.value = JSON.parse(storedUser);
+  }
+};
+
+onMounted(() => {
+  fetchUserData();
+});
 </script>
 
 <template>
@@ -23,7 +36,7 @@ const sidebarClasses = computed(() => ({
     <AppHeader />
 
     <div
-      class="flex flex-col md:flex-row p-10 border-b border-main-text"
+      class="flex flex-col md:flex-row border-b border-main-text"
       :style="{ borderColor: 'var(--border-color)' }"
     >
       <!-- the sidebar -->
@@ -33,7 +46,7 @@ const sidebarClasses = computed(() => ({
       >
         <button
           @click="toggleSidebar"
-          class="flex items-center justify-center absolute top-4 -right-5 z-10 bg-[#30d599] text-black p-2 rounded-full"
+          class="flex items-center justify-center absolute top-4 -right-5 z-10 bg-[#30d599] text-black p-2 rounded-full hover:bg-[#19ec9f] transition-all duration-300 ease-in-out"
         >
           <i
             :class="isOpen ? 'pi pi-angle-left' : 'pi pi-angle-right'"
@@ -77,6 +90,15 @@ const sidebarClasses = computed(() => ({
                 <span v-if="isOpen" class="text-xl">Create New Chef</span>
               </NuxtLink>
             </li>
+            <li
+              v-if="isOpen"
+              class="mb-2 mt-10 relative bg-rose-600 p-4 text-center"
+            >
+              <span
+                >Welcome Chef,
+                <span class="uppercase italic">{{ user?.name }}</span></span
+              >
+            </li>
           </ul>
         </div>
       </div>
@@ -90,6 +112,7 @@ const sidebarClasses = computed(() => ({
       </div>
     </div>
     <AppFooter />
+    <ScrollTop />
   </div>
 </template>
 
