@@ -3,5 +3,6 @@
     <AppHeader />
     <slot></slot>
     <AppFooter />
+    <ScrollTop />
   </div>
 </template>
