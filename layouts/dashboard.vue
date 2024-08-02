@@ -70,6 +70,17 @@ onMounted(() => {
             </li>
             <li class="mb-2 relative">
               <NuxtLink
+                to="/kitchen/list-of-chefs"
+                exact-active-class="active-link"
+                class="nav-link flex items-center gap-4 hover:bg-gray-700 p-2 rounded"
+                v-tooltip="isOpen ? '' : 'Chefs'"
+              >
+                <i class="pi pi-address-book text-xl"></i>
+                <span v-if="isOpen" class="text-xl">Chefs</span>
+              </NuxtLink>
+            </li>
+            <li class="mb-2 relative">
+              <NuxtLink
                 to="/kitchen/cooking"
                 exact-active-class="active-link"
                 class="nav-link flex items-center gap-4 hover:bg-gray-700 p-2 rounded"
